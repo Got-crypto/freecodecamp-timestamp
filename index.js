@@ -45,7 +45,7 @@ app.get("/api/:date", (req, res) => {
     }
   }
 
-  const date = isNumber ? parseInt(reqDate) : reqDate
+  const date = isNumber ? parseInt(reqDate) : Date.parse(reqDate)
 
   const resDate = new Date(date)
 
