@@ -24,6 +24,16 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get('/api', (req, res) => {
+  const date = Date.now()
+  
+  const resDate = new Date(date)
+
+  const dateFormat = `${resDate.toUTCString()}`
+
+  res.json({unix: date, utc: dateFormat})
+})
+
 app.get("/api/:date", (req, res) => {
   const reqDate = req.params.date
   let isNumber = !0;
