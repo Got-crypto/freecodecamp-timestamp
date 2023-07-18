@@ -26,12 +26,23 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date", (req, res) => {
   const reqDate = req.params.date
-  const resDate = new Date(parseInt(reqDate))
+  let isNumber = !0;
+  
+  for(let character of reqDate) {
+    if(parseInt(character) === NaN) {
+      isNumber = !1
+      break
+    }
+  }
 
-  res.json({unix: reqDate, utc: resDate})
+  const date = isNumber ? parseInt(reqDate) : reqDate
+
+  const resDate = new Date(date)
+
+  const dateFormat = `${resDate.toUTCString()}`
+
+  res.json(date ? {unix: date, utc: dateFormat} : {error: 'Invalid Date'})
 })
-
-
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
