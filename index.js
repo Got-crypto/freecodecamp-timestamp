@@ -39,7 +39,7 @@ app.get("/api/:date", (req, res) => {
   let isNumber = !0;
   
   for(let character of reqDate) {
-    if(parseInt(character) === NaN) {
+    if(isNaN(parseInt(character))){
       isNumber = !1
       break
     }
